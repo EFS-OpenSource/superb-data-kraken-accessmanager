@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accessmanager
+  namespace: backend
+  labels:
+    app: accessmanager
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: accessmanager
+      labels:
+        app: accessmanager
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8090"
+        prometheus.io/path: "/accessmanager/actuator/prometheus"
+    spec:
+      serviceAccountName: accessmanager-account
+      containers:
+        - name: accessmanager
+          image: acr$(environment).azurecr.io/accessmanager:$(tagVersion)
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: secret-mount
+              mountPath: "/etc/secrets"
+              readOnly: true
+            - name: storage-secret
+              mountPath: "/etc/storage-secret"
+              readOnly: true
+            - name: app-configuration
+              mountPath: "/etc/application"
+              readOnly: true
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1024Mi
+              cpu: 500m
+          ports:
+            - containerPort: 8090
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /accessmanager/actuator/health
+              port: 8090
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 1
+            successThreshold: 1
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: agentpool
+                    operator: In
+                    values:
+                      - userpool
+      volumes:
+        - name: secret-mount
+          secret:
+            secretName: eventhub-secret
+        - name: storage-secret
+          secret:
+            secretName: accessmanager-secret
+        - name: app-configuration
+          configMap:
+            name: accessmanager
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: accessmanager

@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: accessmanager
+  namespace: backend
+data:
+  applicationinsights.json: |-
+    {
+      "connectionString": "$(app-insights-con-string)",
+      "role": {
+        "name": "Accessmanager Backend"
+      },
+      "instrumentation": {
+        "logging": {
+          "level": "OFF"
+        },
+        "micrometer": {
+          "enabled": true
+        }
+      },
+      "heartbeat": {
+        "intervalSeconds": 60
+      }
+    }
+  application.yml: |-
+    azure:
+      application-insights:
+        instrumentation-key: $(app-insights-instrumentation-key)
+    apidoc:
+      title: EFS SDK AccessManager-API
+    sdk:
+      oauth2:
+        config-url: http://keycloak$(postfix)-http.operations.svc.cluster.local/auth/realms/efs-$(environment)/.well-known/openid-configuration
+        client-id: $(environment)-client
+        authorization-grant-type: authorization_code
+        scope: openid
+        user-name-attribute: preferred_username
+    sas:
+      token:
+        expiration:
+          read: 60
+          write: 60
+          delete: 60
+        cache:
+          buffer: 10
+    server:
+      port: 8090
+      servlet:
+        context-path: /accessmanager
+      error:
+        include-message: always
+    spring:
+      kafka:
+        admin:
+          fail-fast: true
+        topic: accessmanager-commit
+        bootstrap-servers: $(environment)-eventhub$(postfix).servicebus.windows.net:9093
+        properties:
+          sasl:
+            mechanism: PLAIN
+          security:
+            protocol: SASL_SSL
+          group:
+            id: $Default
+    accessmanager:
+      topic:
+        upload-complete: accessmanager-commit
+      storage:
+        region: westeurope
+        resourcegroup: $(resourcegroup)
+      organizationmanager-endpoints:
+        organization: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v1.0/organization
+        space: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v1.0/space
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: [
+              prometheus,
+              health,
+              info
+            ]
+    logging:
+      config: classpath:com/efs/sdk/logging/sdk.logback.xml
+      level:
+        com.efs.sdk: $(logging-level)

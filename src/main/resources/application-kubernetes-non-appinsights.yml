@@ -1,0 +1,18 @@
+spring:
+  config:
+    import: "kubernetes:"
+  application:
+    name: accessmanager
+  cloud:
+    kubernetes:
+      secrets:
+        enabled: true
+        paths:
+          - /etc/secrets
+          - /etc/storage-secret
+      config:
+        paths:
+          - /etc/application/application.yml
+        enable-api: false
+      reload:
+        enabled: false

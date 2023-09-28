@@ -1,0 +1,60 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sdk-datastore-accessmanager-service
+  description: AccessManager Service of the Superb Data Kraken
+  annotations:
+    dev.azure.com/project-repo: EFS-SDK/accessmanager
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - java
+    - spring-boot
+    - sdk
+    - sdk-datastore
+  links:
+    - url: https://sdk.efs.ai/accessmanager/swagger-ui/index.html
+      title: e:fs SDK (prod) Swagger UI
+    - url: https://sdk-dev.efs.ai/accessmanager/swagger-ui/index.html
+      title: e:fs SDK (dev) Swagger UI
+    - url: https://aicloud.efs.ai/accessmanager/swagger-ui/index.html
+      title: AICloud (prod) Swagger UI
+spec:
+  type: service
+  lifecycle: production
+  owner: team-sdk
+  system: sdk
+  subcomponentOf: sdk-datastore
+  dependsOn:
+    - component:sdk-metadata-organizationmanager-service
+    - component:sdk-operations-keycloak-service
+    - component:sdk-operations-kafka-service
+  providesApis:
+    - sdk-datastore-accessmanager-api
+  consumesApis:
+    - sdk-metadata-organizationmanager-api
+    - sdk-operations-keycloak-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: sdk-datastore-accessmanager-api
+  description: AccessManager API of the Superb Data Kraken
+  annotations:
+    dev.azure.com/project-repo: EFS-SDK/accessmanager
+  tags:
+    - sdk
+    - sdk-datastore
+  links:
+    - url: https://sdk.efs.ai/accessmanager/swagger-ui/index.html
+      title: e:fs SDK (prod) Swagger UI
+    - url: https://sdk-dev.efs.ai/accessmanager/swagger-ui/index.html
+      title: e:fs SDK (dev) Swagger UI
+    - url: https://aicloud.efs.ai/accessmanager/swagger-ui/index.html
+      title: AICloud (prod) Swagger UI
+spec:
+  type: openapi
+  lifecycle: production
+  owner: team-sdk
+  system: sdk
+  definition:
+    $text: https://sdk.efs.ai/accessmanager/v3/api-docs

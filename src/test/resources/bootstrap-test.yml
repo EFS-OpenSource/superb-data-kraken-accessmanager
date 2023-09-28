@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: accessmanager
+  cloud:
+    kubernetes:
+      enabled: false

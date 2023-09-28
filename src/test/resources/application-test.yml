@@ -1,0 +1,29 @@
+sas:
+  token:
+    expiration:
+      read: 10
+      write: 10
+      delete: 10
+    cache:
+      buffer: 2
+server:
+  port: 8090
+accessmanager:
+  auth:
+    issuers: http://localhost:8080/auth/realms/efs-sdk
+  topic:
+    upload-complete: accessmanager-commit
+  kafka:
+    enabled: false
+    auto-start: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [
+            prometheus,
+            health,
+            info
+        ]
+storage:
+  container-creation-allowed: false

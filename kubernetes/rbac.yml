@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: accessmanager-account
+ namespace: backend
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: accessmanager-namespace-reader-binding
+  namespace: backend
+subjects:
+  - kind: ServiceAccount
+    name: accessmanager-account
+    namespace: backend
+    apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: namespace-reader
+  apiGroup: ""
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: storage-connection-updater
+  namespace: backend
+rules:
+  - verbs:
+      - patch
+    apiGroups:
+      - ""
+    resources:
+      - secrets
+    resourceNames:
+      - accessmanager-storage-connections
+  - verbs:
+      - create
+    apiGroups:
+      - ""
+    resources:
+      - secrets
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: storage-connection-update
+  namespace: backend
+subjects:
+  - kind: ServiceAccount
+    name: accessmanager-account
+    namespace: backend
+    apiGroup: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: storage-connection-updater
