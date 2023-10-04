@@ -19,8 +19,7 @@ If you are interested in an issue, it is good to leave a comment to make sure th
 
 
 In addition to contributors, there are repository maintainers who are responsible for
-merging pull requests, the [release process](./docs/release-process.md), and
-moderation.
+merging pull requests and moderation.
 
 
 When contributing, please follow the general [Contribution guidelines to Open Source Projects](http://www.contribution-guide.org/#), as long as not stated otherwise below.
