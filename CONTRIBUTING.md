@@ -2,7 +2,7 @@
 [good first issue]: https://github.com/EFS-OpenSource/superb-data-kraken-accessmanager/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22
 [contacting us]: mailto:sdk@efs-techhub.com
 
-# Contributing to Superb Data Kraken (SDK) <!-- omit in toc -->
+# Contributing to the Superb Data Kraken (SDK) <!-- omit in toc -->
 
 The Superb Data Kraken (SDK) operates an open contribution model where everyone may contribute
 in development, reviewing and testing.
