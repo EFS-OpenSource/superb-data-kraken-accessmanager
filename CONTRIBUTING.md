@@ -30,7 +30,7 @@ When contributing, please follow the general [Contribution guidelines to Open So
 
 To contribute to Superb Data Kraken, follow these steps:
 
-1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository on GitHub-
+1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository on GitHub.
 2. [Clone](https://git-scm.com/docs/git-clone) your forked repository to your local machine.
 
 Please follow the [documentation](README.md) carefully on how to set up the development environment and provide tests.
@@ -88,8 +88,7 @@ and will comply with the following:
 
 
 - Any code you submit must be your original work, or you must have the necessary permissions to contribute it.
-- If you include code from other sources (e.g., libraries, frameworks, or open-source projects),
-- Ensure that the code is properly attributed, and its licensing terms are compatible with this project's licensing.
+- If you include code from other sources (e.g., libraries, frameworks, or open-source projects), ensure that the code is properly attributed, and its licensing terms are compatible with this project's licensing.
 - Please contain the standard SDK Apache License 2.0 header in all (new) files.
 
 ### Reporting Copyright Violations
