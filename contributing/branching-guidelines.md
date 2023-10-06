@@ -10,7 +10,7 @@ Each new feature will be developed in a ```feature```-Branch, which holds each c
 
 If there are any bugs detected in the ```main```-Branch, fixes should be made in a ```hotfix```-Branch. This will be created based on the main-Branch and will be merged into develop and subsequently into the main. Please consider [naming](#naming).
 
-![Branching-Model](./docs/images/SDK_Branching_Modell.png)
+![Branching-Model](./../docs/images/SDK_Branching_Modell.png)
 
 ### Naming
 

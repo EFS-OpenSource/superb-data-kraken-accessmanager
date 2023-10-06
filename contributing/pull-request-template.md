@@ -28,8 +28,7 @@ Please describe the tests that you ran to verify your changes.
 Please check that your changes...
 
 - [ ] meet the user experience and documentation or architecture design report, if there is one 
-- [ ] follow a consistent and well-suited approach 
-- [ ] are atomic i.\,e. code reformatting, code moves, code changes, multiple features are not mixed
+- [ ] follow a consistent and well-suited approach
 - [ ] follow the style guidelines of the project
 - [ ] generate no new warnings, no regressions and be compatible with existing features
 - [ ] pass sonarlint checks

@@ -51,7 +51,7 @@ Scan through our [issue tracker] to find one that interests you.
 
 The workflow to submit changes is as follows:
 1. [Create a topic branch](contributing/git-commands.md/#create-topic-branch) \
-Check out a new branch based on the development branch (see [branching conventions](contributing/branching-guidelines/#branching)) according to the [branch naming conventions](contributing/branching-guidelines/#branching).
+Check out a new branch based on the development branch (see [branching conventions](contributing/branching-guidelines.md/#branching)) according to the [branch naming conventions](contributing/branching-guidelines.md/#naming).
 Use one branch per fix / feature.
 2. Contribute code \
 To maintain consistency in our codebase, please follow coding standards and best practices and [legal compliance](#legal-compliance).

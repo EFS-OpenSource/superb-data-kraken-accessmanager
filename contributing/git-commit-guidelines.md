@@ -17,7 +17,7 @@ and follow the [seven rules of a great Git commit message](https://chris.beams.i
 6. Wrap the (optional) body at 72 characters
 7. Use the (optional) body to explain what and why vs. how
 
-If the title alone is self-explanatory (like "Correct typo in init.cpp"), a single title line is sufficient.
+If the title alone is self-explanatory (like "Correct typo in CONTRIBUTING.md"), a single title line is sufficient.
 Do not make any username `@` mentions.
 
 This structure provides the possibility to automatically generate changelogs.
@@ -34,38 +34,37 @@ template = ~/.gitmessage
 and provide a .gitmessage in your user-home.
 
 Here is an example of a .gitmessage-file in SDK-environment:
+```
+<type>[optional scope]: <summary, max 50 characters>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+And an example commit message:
 
 ```
-<type>: <description>
-#-------------- 50 characters ------------------|
- 
-ADDED:
--
- 
-CHANGED:
--
- 
-DELETED:
--
- 
- 
-REFS: <storynumber>
- 
- 
-#--------------- 72 characters ---------------------------------------|
- 
-# DESCRIPTION
-#
-# <type>:
-#
-# feat:     (new feature for the user, not a new feature for build script)
-# fix:      (bug fix for the user, not a fix to a build script)
-# docs:     (changes to the documentation)
-# style:    (formatting, missing semi colons, etc; no production code change)
-# refactor: (refactoring production code, eg. renaming a variable)
-# test:     (adding missing tests, refactoring tests; no production code change)
-#
+fix: Prevent racing of requests
+
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+
+Refs: #123
 ```
+
+
+
+The following types shall be used:
+- fix: a commit of the type fix patches a bug in your codebase (this correlates with PATCH in Semantic Versioning).
+- feat: a commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
+- BREAKING CHANGE: a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in Semantic Versioning). A BREAKING CHANGE can be part of commits of any type.
+- types other than fix: and feat: are allowed, for example @commitlint/config-conventional (based on the Angular convention) recommends build:, chore:, ci:, docs:, style:, refactor:, perf:, test:, and others.
+- footers other than BREAKING CHANGE: <description> may be provided and follow a convention similar to git trailer format.
+
 
 For more information, see [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
