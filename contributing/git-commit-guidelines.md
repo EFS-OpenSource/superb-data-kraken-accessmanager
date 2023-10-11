@@ -1,9 +1,9 @@
 ## Git Commit Guidelines
 
-Please make sure that git commits
-  - are [atomic](https://en.wikipedia.org/wiki/Atomic_commit#Atomic_commit_convention), i.\,e. never mix code reformatting, code moves and code changes or commit multiple features at once.
+Please make sure that the (squashed) git commits that are to be merged within a pull request
+  - are (if applicable) [atomic](https://en.wikipedia.org/wiki/Atomic_commit#Atomic_commit_convention), i.\,e. do not mix code reformatting, code moves and code changes or commit multiple features at once.
   - are clean and complete, i.\,e. the code builds without errors or warnings or test failures, and provides documentation and tests for the new feature.
-  - Please provide a git message that explains what you've done and why (see below)
+  - have git message that explains what you've done and why (see below)
 
 ### Commit-Messages
 

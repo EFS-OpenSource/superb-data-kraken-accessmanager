@@ -56,9 +56,10 @@ Use one branch per fix / feature.
 2. Contribute code \
 To maintain consistency in our codebase, please follow coding standards and best practices and [legal compliance](#legal-compliance).
 3. [Commit patches](contributing/git-commands.md/#commit-patches) and when ready, [push to the remote branch](contributing/git-commands.md/#push-to-the-remote-branch)
-4. Create a [Pull request (PR)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to submit your changes for review.
-Fill out the [pull request template](contributing/pull-request-template.md) and perform a [self-review](contributing/pull-request-template.md/#self-review).
-5. Address Feedback during [peer review](#review-process)
+4. [Squash commits](https://git-scm.com/docs/git-rebase) to a single feature commit with a meaningful [commit message](contributing/git-commit-guidelines.md)
+5. Create a [Pull request (PR)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to submit your changes for review.
+Fill out the [pull request template](contributing/pull-request-template.md) and perform a [self-review](contributing/pull-request-template.md/#self-review). 
+6. Address Feedback during [peer review](#review-process)
 - You can add more commits to your pull request by committing them locally and pushing to your fork.
 - Please reply to any review comments before your pull request is merged.
 - If there is outstanding feedback, and you are not actively working on it, your pull request may be closed.
