@@ -2,9 +2,9 @@
 
 ### Branching
 
-The ```main```-branch portraits a stable, tested status. The commits of this branch hold tags for the according versions.
+The ```main```-branch portraits a stable, tested status. 
 
-The ```develop```- branch is based on the ```main```-branch for single features and will be merged into the main with each new version. Tags with the according versions will be created.
+The ```develop```- branch is based on the ```main```-branch for single features and will be merged into the main with each new version. 
 
 Each new feature will be developed in a ```feature```-Branch, which holds each commit for its development. After the development a review will occur, if everything is fine, it will be merged into the ```develop```-Branch. Please consider [naming](#naming) conventions.
 
