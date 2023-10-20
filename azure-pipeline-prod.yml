@@ -3,7 +3,7 @@ trigger:
   batch: true
   branches:
     include:
-    - master
+    - main
 
 # Image used for the agents (= the VMs that actually run the steps in this pipeline)
 pool:
