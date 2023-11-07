@@ -51,7 +51,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = AccessManagerException.class)
     private ResponseEntity<Object> handleAccessManagerException(AccessManagerException ex, WebRequest request) {
-        LOG.debug(ex.getMessage(), ex);
+        LOG.error(ex.getMessage(), ex);
         // Creating a map to hold the error details.
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
