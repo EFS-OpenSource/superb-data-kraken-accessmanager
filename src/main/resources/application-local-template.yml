@@ -1,7 +1,12 @@
 apidoc:
   title: EFS SDK AccessManager-API
+sdk:
   oauth2:
-    config-url: https://sdk-dev.efs.ai/auth/realms/efs-sdk/.well-known/openid-configuration
+    config-url: https://$(DOMAIN)/auth/realms/$(REALM)/.well-known/openid-configuration
+    client-id: sdk-client
+    authorization-grant-type: authorization_code
+    scope: openid
+    user-name-attribute: preferred_username
 sas:
   token:
     expiration:
@@ -11,27 +16,12 @@ sas:
     cache:
       buffer: 2
 server:
-  port: 8090
+  port: 8092
   servlet:
     context-path: /accessmanager
   error:
     include-message: always
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: https://sdk-dev.efs.ai/auth/realms/efs-sdk/protocol/openid-connect/certs
-      client:
-        registration:
-          keycloak:
-            client-id: sdk-client
-            authorization-grant-type: authorization_code
-            scope: openid
-        provider:
-          keycloak:
-            issuer-uri: https://sdk-dev.efs.ai/auth/realms/efs-sdk
-            user-name-attribute: preferred_username
   kafka:
     admin:
       fail-fast: true
@@ -50,7 +40,7 @@ accessmanager:
     upload-complete: accessmanager-commit
   storage:
     user:
-      client-id: <CLIENT-ID>
+      client-id: $(CLIENT_ID)
       client-secret: <CLIENT-SECRET>
       tenant: <TENANT>
     resourcegroup: SDK
