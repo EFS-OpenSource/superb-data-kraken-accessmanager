@@ -41,7 +41,7 @@ accessmanager:
   storage:
     user:
       client-id: $(CLIENT_ID)
-      client-secret: $(CLIENT-SECRET)
+      client-secret: $(CLIENT_SECRET)
       tenant: $(TENANT)
     resourcegroup: SDK
   organizationmanager-endpoints:
