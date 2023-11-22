@@ -3,7 +3,7 @@ apidoc:
 sdk:
   oauth2:
     config-url: https://$(DOMAIN)/auth/realms/$(REALM)/.well-known/openid-configuration
-    client-id: sdk-client
+    client-id: $(CLIENT-ID)
     authorization-grant-type: authorization_code
     scope: openid
     user-name-attribute: preferred_username
@@ -41,12 +41,12 @@ accessmanager:
   storage:
     user:
       client-id: $(CLIENT_ID)
-      client-secret: <CLIENT-SECRET>
-      tenant: <TENANT>
+      client-secret: $(CLIENT-SECRET)
+      tenant: $(TENANT)
     resourcegroup: SDK
   organizationmanager-endpoints:
-    organization: http://localhost:8091/organizationmanager/api/v1.0/organization
-    space: http://localhost:8091/organizationmanager/api/v1.0/space
+    organization: http://localhost:8094/organizationmanager/api/v1.0/organization
+    space: http://localhost:8094/organizationmanager/api/v1.0/space
 management:
   endpoints:
     web:
