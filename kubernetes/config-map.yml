@@ -6,7 +6,7 @@ metadata:
 data:
   applicationinsights.json: |-
     {
-      "connectionString": "$(app-insights-con-string)",
+      "connectionString": "$(APP_INSIGHTS_CONNECTION_STRING)",
       "role": {
         "name": "Accessmanager Backend"
       },
@@ -25,13 +25,13 @@ data:
   application.yml: |-
     azure:
       application-insights:
-        instrumentation-key: $(app-insights-instrumentation-key)
+        instrumentation-key: $(APP_INSIGHTS_INSTRUMENTATION_KEY)
     apidoc:
       title: EFS SDK AccessManager-API
     sdk:
       oauth2:
-        config-url: http://keycloak$(postfix)-http.operations.svc.cluster.local/auth/realms/efs-$(environment)/.well-known/openid-configuration
-        client-id: $(environment)-client
+        config-url: http://keycloak$(postfix)-http.operations.svc.cluster.local/auth/realms/$(REALM)/.well-known/openid-configuration
+        client-id: $(CLIENT_ID)
         authorization-grant-type: authorization_code
         scope: openid
         user-name-attribute: preferred_username
@@ -54,7 +54,7 @@ data:
         admin:
           fail-fast: true
         topic: accessmanager-commit
-        bootstrap-servers: $(environment)-eventhub$(postfix).servicebus.windows.net:9093
+        bootstrap-servers: $(KAFKA_BOOTSTRAP_SERVER)
         properties:
           sasl:
             mechanism: PLAIN
@@ -67,7 +67,7 @@ data:
         upload-complete: accessmanager-commit
       storage:
         region: westeurope
-        resourcegroup: $(resourcegroup)
+        resourcegroup: $(RESOURCE_GROUP)
       organizationmanager-endpoints:
         organization: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v1.0/organization
         space: http://organizationmanager$(postfix).backend.svc.cluster.local:8090/organizationmanager/api/v1.0/space
@@ -83,5 +83,4 @@ data:
     logging:
       config: classpath:com/efs/sdk/logging/sdk.logback.xml
       level:
-        com.efs.sdk: $(logging-level)
-        org.springframework.web: INFO
+        com.efs.sdk: $(LOG_LEVEL)
