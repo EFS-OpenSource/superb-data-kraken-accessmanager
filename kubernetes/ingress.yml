@@ -10,23 +10,13 @@ metadata:
     appgw.ingress.kubernetes.io/appgw-ssl-certificate: cert-frontend-letsencrypt-cert
 spec:
   rules:
-  - host: efs-$(environment).westeurope.cloudapp.azure.com
+  - host: $(DOMAIN)
     http:
       paths:
       - path: /accessmanager/*
         pathType: Prefix
         backend:
           service:
-            name: accessmanager
-            port:
-              number: 8090
-  - host: $(main-domain)
-    http:
-      paths:
-      - path: /accessmanager/*
-        pathType: Prefix
-        backend:
-          service:
-            name: accessmanager
+            name: accessmanager$(postfix)
             port:
               number: 8090

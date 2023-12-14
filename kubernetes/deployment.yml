@@ -19,58 +19,58 @@ spec:
     spec:
       serviceAccountName: accessmanager-account
       containers:
-        - name: accessmanager
-          image: acr$(environment).azurecr.io/accessmanager:$(tagVersion)
-          imagePullPolicy: Always
-          volumeMounts:
-            - name: secret-mount
-              mountPath: "/etc/secrets"
-              readOnly: true
-            - name: storage-secret
-              mountPath: "/etc/storage-secret"
-              readOnly: true
-            - name: app-configuration
-              mountPath: "/etc/application"
-              readOnly: true
-          resources:
-            requests:
-              memory: 512Mi
-              cpu: 200m
-            limits:
-              memory: 1024Mi
-              cpu: 500m
-          ports:
-            - containerPort: 8090
-              name: http
-          readinessProbe:
-            httpGet:
-              path: /accessmanager/actuator/health
-              port: 8090
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 2
-            failureThreshold: 1
-            successThreshold: 1
+      - name: accessmanager
+        image: $(CONTAINER_REGISTRY)/accessmanager:$(tagVersion)
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-mount
+          mountPath: "/etc/secrets"
+          readOnly: true
+        - name: storage-secret
+          mountPath: "/etc/storage-secret"
+          readOnly: true
+        - name: app-configuration
+          mountPath: "/etc/application"
+          readOnly: true
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 200m
+          limits:
+            memory: 1024Mi
+            cpu: 500m
+        ports:
+        - containerPort: 8090
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /accessmanager/actuator/health
+            port: 8090
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 1
+          successThreshold: 1
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: agentpool
-                    operator: In
-                    values:
-                      - userpool
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: agentpool
+                operator: In
+                values:
+                - userpool
       volumes:
-        - name: secret-mount
-          secret:
-            secretName: eventhub-secret
-        - name: storage-secret
-          secret:
-            secretName: accessmanager-secret
-        - name: app-configuration
-          configMap:
-            name: accessmanager
+      - name: secret-mount
+        secret:
+          secretName: eventhub-secret
+      - name: storage-secret
+        secret:
+          secretName: accessmanager-secret
+      - name: app-configuration
+        configMap:
+          name: accessmanager
       restartPolicy: Always
   selector:
     matchLabels:

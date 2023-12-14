@@ -1,0 +1,58 @@
+apidoc:
+  title: EFS SDK AccessManager-API
+sdk:
+  oauth2:
+    config-url: https://$(DOMAIN)/auth/realms/$(REALM)/.well-known/openid-configuration
+    client-id: $(CLIENT-ID)
+    authorization-grant-type: authorization_code
+    scope: openid
+    user-name-attribute: preferred_username
+sas:
+  token:
+    expiration:
+      read: 60
+      write: 60
+      delete: 60
+    cache:
+      buffer: 2
+server:
+  port: 8092
+  servlet:
+    context-path: /accessmanager
+  error:
+    include-message: always
+spring:
+  kafka:
+    admin:
+      fail-fast: true
+    bootstrap-servers: <EVENTHUB-NAMESPACE>.servicebus.windows.net:9093
+    properties:
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://<EVENTHUB-NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<POLICY_NAME>;SharedAccessKey=<SHARED_ACCESS_KEY>";
+      security:
+        protocol: SASL_SSL
+      group:
+        id: $Default
+accessmanager:
+  topic:
+    upload-complete: accessmanager-commit
+  storage:
+    user:
+      client-id: $(CLIENT_ID)
+      client-secret: $(CLIENT_SECRET)
+      tenant: $(TENANT)
+    resourcegroup: SDK
+  organizationmanager-endpoints:
+    organization: http://localhost:8094/organizationmanager/api/v1.0/organization
+    space: http://localhost:8094/organizationmanager/api/v1.0/space
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [
+          prometheus,
+          health,
+          info
+        ]

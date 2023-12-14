@@ -14,15 +14,16 @@
   <em>A data platform for everyone</em>
 </p>
 
-- [Badges](#badges)
-- [Description](#description)
-- [Getting Started](#getting-started)
+- [AccessManager](#accessmanager)
+  - [Badges](#badges)
+  - [Description](#description)
+  - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Configuration](#configuration)
     - [Usage](#usage)
-- [Contributing](#contributing)
-- [Changelog](#changelog)
+  - [Contributing](#contributing)
+  - [Changelog](#changelog)
 
 ## Description
 
@@ -31,10 +32,10 @@ The `Accessmanager` is a component of the **Superb Data Kraken Platform (SDK)**.
 It provides endpoints for handling storage-access.
 
 For a more detailed understanding of the broader context of the platform this project is used in, refer to
-the [architecture documentation](https://github.com/EFS-OpenSource/superb-data-kraken-architecture). (TODO)
+the [architecture documentation](https://efs-opensource.github.io/superbdatakraken/architecture/).
 
-For instructions on how to deploy the Search-Service on an instance of the **SDK**, refer to
-the [installation instructions](https://github.com/EFS-OpenSource/superb-data-kraken-install-instructions). (TODO)
+For instructions on how to deploy the accessmanager on an instance of the **SDK**, refer to
+the [installation instructions](https://efs-opensource.github.io/superbdatakraken/operator-manual/installation/).
 
 Refer to [index.md](docs%2Findex.md) for more detailed but deployment specific documentation.
 
@@ -63,12 +64,12 @@ To set up your local environment for development and testing, follow these steps
     ```bash
    cp src/main/resources/application-local-template.yml src/main/resources/application-local.yaml
    ```
-   Configure the `application-local.yaml` file based on your local development setup. The OpenSearch instance and the OIDC provider instance need to be
-   configured correctly for the search service to run as expected.
-1. Run the service:
+   Configure the `application-local.yaml` file based on your local development setup. The OIDC provider instance needs to be
+   configured correctly for the accessmanager to run as expected.
+2. Run the service:
    ```bash
    ./mvnw spring-boot:run -Dspring-boot:run.profiles=local
-1. After successful setup, you can test the service using the auto-generated API documentation at:
+3. After successful setup, you can test the service using the auto-generated API documentation at:
    ```
    https://localhost:8092/accessmanager/swagger-ui/index.html
 
@@ -80,7 +81,6 @@ To set up your local environment for development and testing, follow these steps
 - Replace all placeholders enclosed in `$()`, e.g.:
     - `REALM`: the specific realm set up with the openid connect (oidc) provider.
     - `CLIENT_ID`: the unique identifier for the service account that the service utilizes.
-    - `CLIENT_SECRET`: the confidential passphrase or key associated with the service account.
 
 ### Usage
 
