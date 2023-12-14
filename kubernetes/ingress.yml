@@ -10,13 +10,13 @@ metadata:
     appgw.ingress.kubernetes.io/appgw-ssl-certificate: cert-frontend-letsencrypt-cert
 spec:
   rules:
-  - host: $(main-domain)
+  - host: $(DOMAIN)
     http:
       paths:
       - path: /accessmanager/*
         pathType: Prefix
         backend:
           service:
-            name: accessmanager
+            name: accessmanager$(postfix)
             port:
               number: 8090

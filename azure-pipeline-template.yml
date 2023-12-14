@@ -146,20 +146,11 @@ stages:
               action: 'deploy'
               kubernetesServiceConnection: '$(kubernetesServiceConnection)'
               namespace: 'backend'
-              ${{ if eq(parameters.stage, 'prod') }}:
-                manifests: |
-                  $(Pipeline.Workspace)/kubernetes/config-map.yml
-                  $(Pipeline.Workspace)/kubernetes/deployment.yml
-                  $(Pipeline.Workspace)/kubernetes/ingress.yml
-                  $(Pipeline.Workspace)/kubernetes/rbac.yml
-                  $(Pipeline.Workspace)/kubernetes/service.yml
-                  $(Pipeline.Workspace)/kubernetes/secret.yml
-              ${{ if eq(parameters.stage, 'dev') }}:
-                manifests: |
-                  $(Pipeline.Workspace)/kubernetes/config-map.yml
-                  $(Pipeline.Workspace)/kubernetes/deployment.yml
-                  $(Pipeline.Workspace)/kubernetes/ingress-dev.yml
-                  $(Pipeline.Workspace)/kubernetes/rbac.yml
-                  $(Pipeline.Workspace)/kubernetes/service.yml
-                  $(Pipeline.Workspace)/kubernetes/secret.yml
+              manifests: |
+                $(Pipeline.Workspace)/kubernetes/config-map.yml
+                $(Pipeline.Workspace)/kubernetes/secret.yml
+                $(Pipeline.Workspace)/kubernetes/deployment.yml
+                $(Pipeline.Workspace)/kubernetes/ingress.yml
+                $(Pipeline.Workspace)/kubernetes/rbac.yml
+                $(Pipeline.Workspace)/kubernetes/service.yml
               containers: '$(containerRegistry)/$(imageRepository):$(tagVersion)'
